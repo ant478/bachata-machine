@@ -1,0 +1,38 @@
+.base {
+    padding: 0.5em 1.5em;
+    position: relative;
+    transition: opacity $transition;
+    @include control-block;
+
+    &:hover {
+        transition-duration: 0s;
+    }
+
+    &__has-icon {
+        padding-right: 2.5em;
+    }
+
+    &__disabled {
+        background-image: repeating-linear-gradient(
+            45deg,
+            rgba(#000, 0.6),
+            rgba(#000, 0.6) 2px,
+            transparent 2px,
+            transparent 4px
+        );
+        opacity: 0.7;
+        pointer-events: none;
+    }
+}
+
+.icon {
+    bottom: 0;
+    height: 1em;
+    line-height: 1em;
+    margin: auto;
+    position: absolute;
+    right: 1em;
+    text-align: center;
+    top: 0;
+    width: 1em;
+}

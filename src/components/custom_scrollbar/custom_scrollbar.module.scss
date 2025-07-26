@@ -1,0 +1,27 @@
+.thumbVertical {
+    position: relative;
+    @include control-block('::after');
+
+    &::after {
+        bottom: 5px;
+        content: '';
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 5px;
+        width: 10px;
+    }
+}
+
+.trackVertical {
+    bottom: 0;
+    right: 0;
+    top: 0;
+    width: 15px !important;
+    z-index: $scrollbar-track;
+}
+
+.trackHorizontal {
+    pointer-events: none;
+}

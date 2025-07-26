@@ -1,0 +1,47 @@
+.base {
+    @include highlighted-block(var(--code-paterrn-url), center top);
+    height: 62px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 6.375em;
+    padding-right: 1.5em;
+    z-index: $app-header-z-index;
+}
+
+.logoLink {
+    height: 5em;
+    left: 0.75em;
+    position: absolute;
+    top: 0.25em;
+    width: 5em;
+}
+
+.logo {
+    height: 100%;
+    width: 100%;
+
+    &::part(root) {
+        --wc-fill-color: var(--header-logo-color);
+        --wc-background-color: var(--highlighted-block-background-color);
+
+        box-shadow: var(--highlighted-block-shadow);
+    }
+}
+
+.title {
+    @include ellipsis;
+    color: var(--header-title-color);
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1.9375;
+    margin-right: 0.5em;
+    text-shadow: var(--header-title--text-shadow);
+    flex: 1;
+}
+
+.hueControlMix {
+    margin-left: 1em;
+    padding: 0.4375em 0;
+}

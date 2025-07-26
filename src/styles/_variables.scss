@@ -1,0 +1,12 @@
+/* font */
+$font-family-primary: 'Roboto', sans-serif;
+
+/* transition */
+$transition-duration: 0.15s;
+$transition-timing-function: ease-out;
+$transition: $transition-duration $transition-timing-function;
+
+/* z-index */
+$app-header-z-index: 100;
+$scrollbar-track: $app-header-z-index + 1;
+$overlay-z-index: $scrollbar-track + 1;

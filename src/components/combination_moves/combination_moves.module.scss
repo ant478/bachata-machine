@@ -1,0 +1,99 @@
+.base {
+    @include highlighted-block(var(--code-paterrn-url), center top);
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollbarView {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.75em;
+    @include mobile {
+        overflow: hidden !important;
+        position: relative !important;
+    }
+}
+
+.title {
+    @include title;
+    padding: 0.75em 1em 0.5em;
+    padding-right: 3.25em;
+}
+
+.base .undoButton {
+    position: absolute;
+    right: 1em;
+    top: 0.5625em;
+    padding: 0.5em 0.625em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.undoIcon {
+    height: 1em;
+    width: 1em;
+}
+
+.move {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 2.375em;
+    padding-top: 0.5em;
+    padding-left: 1.25em;
+    padding-right: 3.1em;
+    flex-shrink: 0;
+
+    &__count1 {
+        background-color: var(--app-background-color);
+    }
+    &__count5 {
+        background-color: var(--app-mask-background-color);
+    }
+
+    &::before,
+    &::after {
+        pointer-events: none;
+        position: absolute;
+        background-color: var(--page-title-color);
+        left: 0.875em;
+    }
+    &__positionStart::before {
+        content: '';
+        bottom: 0;
+        height: 0.125em;
+        width: 4em;
+    }
+    &__positionContinue::after {
+        content: '';
+        top: 0;
+        bottom: 0;
+        width: 0.125em;
+    }
+    &__positionEnd::after {
+        content: '';
+        top: 0;
+        bottom: 0.5em;
+        width: 0.125em;
+    }
+}
+
+.moveGlyph {
+    position: absolute;
+    right: 0.85em;
+    top: 0.5em;
+}
+
+.moveNewPosition {
+    margin-top: auto;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    opacity: 0.75;
+}
+
+.moveNewPositionHighlight {
+    color: var(--page-title-color);
+    font-weight: 700;
+    font-style: italic;
+}

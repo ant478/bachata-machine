@@ -1,0 +1,122 @@
+@use './variables' as *;
+
+@mixin highlighted-block($maskImageUrl: none, $maskPosition: center) {
+    background-color: var(--highlighted-block-background-color);
+    border-radius: 3px;
+
+    @if ($maskImageUrl == none) {
+        box-shadow: var(--highlighted-block-shadow-inset), var(--highlighted-block-shadow);
+    } @else {
+        position: relative;
+        z-index: 1;
+
+        &::before,
+        &::after {
+            @include full-size;
+
+            border-radius: 3px;
+            content: '';
+            pointer-events: none;
+        }
+
+        &::before {
+            background-color: var(--highlighted-block-mask-color);
+            mask: $maskImageUrl $maskPosition / auto repeat;
+            z-index: -2;
+        }
+
+        &::after {
+            box-shadow: var(--highlighted-block-shadow-inset), var(--highlighted-block-shadow);
+            z-index: -1;
+        }
+    }
+}
+
+@mixin control-block-styles($name: '') {
+    background-color: var(--control-block-background-color#{$name});
+    box-shadow: var(--control-block-shadow-inset#{$name}), var(--control-block-shadow#{$name});
+}
+
+@mixin control-block($selector: '') {
+    user-select: none;
+
+    &#{$selector} {
+        @include control-block-styles;
+
+        border-radius: 5px;
+        transition:
+            background-color $transition,
+            box-shadow $transition;
+    }
+
+    &:focus#{$selector} {
+        @include control-block-styles('-hover');
+
+        transition-duration: 0s;
+    }
+
+    @supports #{'\selector(*:focus-visible)'} {
+        &:focus#{$selector} {
+            @include control-block-styles;
+        }
+        &:focus-visible#{$selector} {
+            @include control-block-styles('-hover');
+
+            transition-duration: 0s;
+        }
+    }
+    &:hover#{$selector} {
+        @include control-block-styles('-hover');
+
+        transition-duration: 0s;
+    }
+    &:active#{$selector} {
+        @include control-block-styles('-active');
+    }
+}
+
+@mixin main-background() {
+    background-color: var(--app-background-color);
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        @include full-size;
+
+        background-color: var(--app-mask-background-color);
+        content: '';
+        mask: var(--main-paterrn-url) center top / auto repeat;
+        pointer-events: none;
+        z-index: -1;
+    }
+}
+
+@mixin title {
+    @include ellipsis;
+    color: var(--page-title-color);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-shadow: var(--page-title-text-shadow);
+}
+
+@mixin full-size($position: absolute, $indent: 0) {
+    bottom: $indent;
+    left: $indent;
+    position: $position;
+    right: $indent;
+    top: $indent;
+}
+
+@mixin absolute-transform-centering {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

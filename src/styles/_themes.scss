@@ -1,0 +1,32 @@
+@use './functions' as *;
+
+@mixin theme-hue() {
+    --primary-text-color: #919191;
+    --selection-text-color: #151515;
+    --selection-background-color: var(--primary-text-color);
+    --app-background-color: #{hsl-with-var(0, 100%, 6%)};
+    --app-mask-background-color: #{hsl-with-var(0, 60%, 6%)};
+    --spinner-color: #{hsl-with-var(0, 100%, 18%)};
+    --highlighted-block-background-color: #{hsl-with-var(0, 0%, 6%)};
+    --highlighted-block-shadow: 0 0 10px #{hsl-with-var(0, 100%, 32%)};
+    --highlighted-block-mask-color: #{hsl-with-var(0, 5%, 5%)};
+    --highlighted-block-shadow-inset: inset 0 0 24px #{hsl-with-var(0, 0%, 0%)};
+    --control-block-background-color: #{hsl-with-var(0, 80%, 6%)};
+    --control-block-background-color-hover: #{hsl-with-var(0, 59%, 8%)};
+    --control-block-background-color-active: #{hsl-with-var(0, 63%, 5%)};
+    --control-block-shadow-inset: inset 0 0 10px #{hsl-with-var(0, 100%, 29%)};
+    --control-block-shadow-inset-hover: inset 0 0 12px #{hsl-with-var(0, 100%, 40%)};
+    --control-block-shadow-inset-active: inset 0 0 12px #{hsl-with-var(0, 100%, 20%)};
+    --control-block-shadow: 0 0 10px #{hsl-with-var(0, 0%, 0%)};
+    --control-block-shadow-hover: var(--control-block-shadow);
+    --control-block-shadow-active: var(--control-block-shadow);
+    --link-color: #{hsl-with-var(0, 85%, 31%)};
+    --link-color-visited: #{hsl-with-var(0, 100%, 20%)};
+    --navigation-active-text-color: #{hsl-with-var(0, 80%, 35%)};
+    --header-logo-color: #{hsl-with-var(0, 100%, 20%)};
+    --header-title-color: #{hsl(calc(var(--hue) + 0), 100%, 24%)};
+    --header-title--text-shadow: 2px 8px 16px #{hsl-with-var(0, 0%, 0%)};
+    --header-control-background-color: #{hsl-with-var(0, 80%, 9%)};
+    --page-title-color: #{hsl-with-var(0, 100%, 31%)};
+    --page-title-text-shadow: 2px 8px 16px #{hsl-with-var(0, 0%, 0%)};
+}

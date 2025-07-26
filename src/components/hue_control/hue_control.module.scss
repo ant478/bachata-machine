@@ -1,0 +1,32 @@
+.base {
+    position: relative;
+}
+
+.sample {
+    background-color: var(--header-control-background-color) !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    height: 3em;
+    position: relative;
+    width: 3em;
+    @include control-block;
+}
+
+.sampleIcon {
+    @include absolute-transform-centering;
+
+    height: 1.25em;
+    transition: color $transition;
+    width: 1.25em;
+
+    .base__controlVisible & {
+        color: var(--page-title-color);
+    }
+}
+
+.sliderMix {
+    left: 50%;
+    position: absolute;
+    top: calc(100% + 1.5em);
+    transform: translateX(-50%);
+}

@@ -1,0 +1,19 @@
+.base {
+    display: flex;
+    flex-direction: column;
+
+    @include mobile {
+        min-height: 100vh;
+    }
+
+    @include desktop {
+        height: 100vh;
+    }
+}
+
+.bachataMachineMix {
+    flex: 1;
+    max-width: 75em;
+    margin: 0 auto;
+    width: 100%;
+}

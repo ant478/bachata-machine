@@ -1,0 +1,3 @@
+@function hsl-with-var($hue-diff, $saturation, $lightness) {
+  @return hsl(calc(var(--hue) + #{$hue-diff}), $saturation, $lightness);
+}

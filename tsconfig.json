@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".", // TODO: check target
+    "lib": ["dom", "esnext"],
+    "types": ["node"],
+    "paths": {
+      "src/*": ["src/*"]
+    }
+  },
+  "include": ["src"]
+}

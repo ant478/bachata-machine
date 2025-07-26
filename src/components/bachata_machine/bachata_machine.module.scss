@@ -1,0 +1,28 @@
+.base {
+    display: flex;
+    flex-direction: column;
+    padding: 2em 0.5em;
+    gap: 1em;
+    @include desktop {
+        flex-direction: row;
+    }
+}
+
+.right,
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    min-width: 0;
+
+    @include desktop {
+        flex: 0 1 50%;
+    }
+}
+
+.availableMovesMix,
+.combinationMovesMix {
+    @include desktop {
+        flex: 1;
+    }
+}

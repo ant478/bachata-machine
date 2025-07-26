@@ -1,0 +1,14 @@
+.base {
+    @include main-background;
+    @include full-size(fixed);
+
+    z-index: $overlay-z-index;
+}
+
+.closeMix {
+    line-height: 1;
+    padding: 0.75em;
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+}

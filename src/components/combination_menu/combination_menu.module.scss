@@ -1,0 +1,51 @@
+.base {
+    @include highlighted-block(var(--code-paterrn-url), center top);
+    padding: 0.75em 1em;
+    padding-right: 3.875em;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    @include title;
+}
+
+.combinationName {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.25;
+}
+
+.menu {
+    @include highlighted-block(var(--code-paterrn-url), center top);
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+    width: 12em;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.menuButton {
+    &:not(:last-child) {
+        margin-bottom: 0.625em;
+    }
+}
+
+.base .openMenuButton {
+    position: absolute;
+    right: 1em;
+    bottom: 0.75em;
+    padding: 0.5em 0.625em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.menuIcon {
+    height: 1em;
+    width: 1em;
+}

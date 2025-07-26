@@ -1,0 +1,44 @@
+.base {
+    box-shadow: var(--control-block-shadow);
+    height: 8em;
+    position: relative;
+    user-select: none;
+    width: 0.25em;
+    z-index: 1;
+
+    &::after {
+        @include full-size(absolute, -1.5em);
+
+        content: '';
+        z-index: -1;
+    }
+}
+
+.control {
+    @include full-size;
+
+    background-image: linear-gradient(to bottom, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+    z-index: 1;
+
+    &::after {
+        @include full-size;
+
+        content: '';
+        left: -0.5em;
+        right: -0.5em;
+        z-index: -1;
+    }
+}
+
+.slider {
+    background-color: transparent !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    height: 1.5em;
+    left: 50%;
+    position: absolute;
+    top: -0.75em;
+    transform: translate(-0.75em, 0);
+    width: 1.5em;
+    @include control-block;
+}

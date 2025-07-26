@@ -1,0 +1,42 @@
+import { MoveId, MOVE_ID, PositionId, POSITION_ID } from 'src/machine';
+
+export const MOVE_TITLE_BY_ID: Record<MoveId, string> = {
+    [MOVE_ID.BASIC]: 'Basic step',
+    [MOVE_ID.STRAIGHT_TURN]: 'Straight turn',
+    [MOVE_ID.STRAIGHT_TURN_SELF]: 'Straight turn (self)',
+    [MOVE_ID.TWO_HAND_TURN]: 'Two hand turn',
+    [MOVE_ID.HAMMERLOCK_TURN]: 'Hammerlock turn',
+    [MOVE_ID.HAMMERLOCK_TURN_SELF]: 'Hammerlock turn (self)',
+    [MOVE_ID.HAMMERUNLOCK_TURN]: 'HammerUnlock turn',
+    [MOVE_ID.HAMMERUNLOCK_TURN_SELF]: 'HammerUnlock turn (self)',
+    [MOVE_ID.DEAD_TURN]: 'Dead turn',
+    [MOVE_ID.WALK_ENTRY]: 'Walk entry',
+    [MOVE_ID.WALK_EXIT_SIMPLE]: 'Walk exit simple',
+    [MOVE_ID.WALK_EXIT_WIDE]: 'Walk exit wide',
+    [MOVE_ID.CUDDLING_ENTRY]: 'Cuddling entry',
+    [MOVE_ID.CUDDLING_EXIT]: 'Cuddling exit',
+    [MOVE_ID.CROSS_BODY_LEAD]: 'Cross body lead',
+    [MOVE_ID.ABDOMINAL_TOUCH_TURN_SELF]: 'Abdominal touch turn (self)',
+    [MOVE_ID.CLOSE_IN_TURN]: 'Close in turn',
+    [MOVE_ID.STEP_AWAY]: 'Step away',
+    [MOVE_ID.CARESS]: 'Caress',
+    [MOVE_ID.CARESS_SELF]: 'Caress (self)',
+    [MOVE_ID.SLIDE]: 'Slide',
+};
+
+export const POSITION_TITLE_BY_ID: Record<PositionId, string> = {
+    [POSITION_ID.OPEN]: 'Open',
+    [POSITION_ID.CLOSED_HALF]: 'Half-closed',
+    [POSITION_ID.CLOSED_FULL]: 'Full-closed',
+    [POSITION_ID.HANDSHAKE]: 'Handshake',
+    [POSITION_ID.HANDSHAKE_REVERSED]: 'Handshake reversed',
+    [POSITION_ID.CROSSED_HANDS_RIGHT]: 'Crossed hands right',
+    [POSITION_ID.CROSSED_HANDS_LEFT]: 'Crossed hands left',
+    [POSITION_ID.HAMMERLOCK_RIGHT]: 'Hammerlock right',
+    [POSITION_ID.HAMMERLOCK_LEFT]: 'Hammerlock left',
+    [POSITION_ID.HAMMERLOCK_RIGHT_SELF]: 'Hammerlock right (self)',
+    [POSITION_ID.HAMMERLOCK_LEFT_SELF]: 'Hammerlock left (self)',
+    [POSITION_ID.WALK]: 'Walk',
+    [POSITION_ID.WALK_FINISH]: 'Walk finish',
+    [POSITION_ID.CUDDLING]: 'Cuddling',
+};
