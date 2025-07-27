@@ -8,6 +8,10 @@
         --wc-nickname-text-color: var(--page-title-color);
         --wc-selection-background-color: var(--selection-background-color);
         --wc-selection-text-color: var(--selection-text-color);
+        @include mobile {
+            flex-direction: column;
+            padding: 0.5em;
+        }
     }
 
     &::part(link),
@@ -17,6 +21,47 @@
 
         &:hover {
             transition-duration: 0s;
+        }
+    }
+    &::part(column__left) {
+        @media ((min-width: 769px) and (max-width: 1200px)) {
+            width: 8.25em;
+        }
+        @include mobile {
+            order: 3;
+            justify-content: center;
+            margin: 0;
+        }
+    }
+    &::part(column__left link) {
+        @include mobile {
+            margin-bottom: 1.5em;
+        }
+    }
+    &::part(column__right) {
+        @media ((min-width: 769px) and (max-width: 1200px)) {
+            flex-direction: column;
+        }
+        @include mobile {
+            order: 2;
+            justify-content: center;
+            margin: 0;
+            margin-bottom: 0.5em;
+        }
+    }
+    &::part(footer_signature-outer) {
+        @media (max-width: 1200px) {
+            max-width: 12em;
+            margin: auto;
+        }
+        @include mobile {
+            order: 1;
+            margin-bottom: 0.5em;
+        }
+    }
+    &::part(link) {
+        @include mobile {
+            margin-bottom: 0.5em;
         }
     }
 }

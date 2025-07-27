@@ -5,7 +5,7 @@ import { useBachataMachine } from 'src/components/bachata_machine/context';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { selectors } from 'src/store/slices/combination_slice';
-import { addCombinations } from 'src/store/slices/combination_slice';
+import { addCombinations, saveCombinations } from 'src/store/slices/combination_slice';
 import { DEFAULT_NAME } from 'src/constants/combination';
 import { ControlButton } from 'src/components/control_button/control_button';
 import { ReactComponent as MenuIcon } from 'src/img/menu.svg';
@@ -86,7 +86,7 @@ const Menu = memo(({ onClose }: MenuProps) => {
             input.click();
         })
             .then((importedCombinations: Combination[]) => {
-                const filteredCombinations = importedCombinations.filter(
+                const newCombinations = importedCombinations.filter(
                     ({ id, ...importedCombinationWithoutId }) =>
                         !combinations.some(
                             ({ id, ...combinationWithoutId }) =>
@@ -94,15 +94,16 @@ const Menu = memo(({ onClose }: MenuProps) => {
                         )
                 );
 
-                if (filteredCombinations.length === 0) return;
+                if (newCombinations.length === 0) return;
 
                 const ids = new Set<number>(combinations.map(({ id }) => id));
-                for (const newCombination of filteredCombinations) {
+                for (const newCombination of newCombinations) {
                     while (ids.has(newCombination.id)) newCombination.id++;
                     ids.add(newCombination.id);
                 }
-                dispatch(addCombinations(filteredCombinations));
-                openCombination(filteredCombinations[0].id);
+                dispatch(addCombinations(newCombinations));
+                dispatch(saveCombinations());
+                openCombination(newCombinations[0].id);
             })
             .catch(err => {
                 console.error('Error:', err.message);

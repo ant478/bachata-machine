@@ -40,16 +40,14 @@
     flex-direction: column;
     position: relative;
     min-height: 2.375em;
-    padding-top: 0.5em;
-    padding-left: 1.25em;
-    padding-right: 3.1em;
+    padding: 0.5em 3.1em 0.125em 1.25em;
     flex-shrink: 0;
 
     &__count1 {
-        background-color: var(--app-background-color);
+        background-color: var(--moves-chart-color-1);
     }
     &__count5 {
-        background-color: var(--app-mask-background-color);
+        background-color: var(--moves-chart-color-2);
     }
 
     &::before,

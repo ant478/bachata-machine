@@ -12,7 +12,5 @@ export function saveHueValueToLocalStorage(value: number | string) {
 }
 
 export function getHueValueFromLocalStorage() {
-    const value = localStorage.getItem(LOCAL_STORAGE_KEY) ?? DEFAULT_HUE;
-
-    return validateHueValue(value);
+    return validateHueValue(localStorage.getItem(LOCAL_STORAGE_KEY) ?? DEFAULT_HUE);
 }
