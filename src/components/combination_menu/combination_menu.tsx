@@ -126,7 +126,7 @@ const Menu = memo(({ onClose }: MenuProps) => {
 
     return (
         <div ref={ref} className={styles.menu}>
-            <CustomScrollbar classNames={openListScrollbarClasses}>
+            <CustomScrollbar className={styles.openListScrollbar} classNames={openListScrollbarClasses}>
                 {(() => {
                     if (isOpeListVisible) {
                         return combinations.map(({ id, name }) => (
