@@ -2,6 +2,7 @@
     padding: 0.5em 1.5em;
     position: relative;
     transition: opacity $transition;
+    word-wrap: break-word;
     @include control-block;
 
     &:hover {

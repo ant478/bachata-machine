@@ -11,6 +11,7 @@
 }
 
 .combinationName {
+    word-wrap: break-word;
     font-style: italic;
     font-weight: 700;
     font-size: 1.25rem;
@@ -21,15 +22,27 @@
     @include highlighted-block(var(--code-paterrn-url), center top);
     position: absolute;
     right: 0.5em;
-    top: 0.5em;
+    bottom: 0.125em;
+    transform: translateY(100%);
     width: 12em;
     z-index: 1;
+    height: 19.375em;
+}
+
+.openListScrollbarView {
+    padding: 1em;
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    @include mobile {
+        overflow: hidden !important;
+        position: relative !important;
+    }
 }
 
 .menuButton {
+    text-align: left;
+    padding: 0.5em 1em;
+
     &:not(:last-child) {
         margin-bottom: 0.625em;
     }

@@ -13,6 +13,8 @@ export type BachataMachineContextData = {
     }[];
     makeMove: (moveId: MoveId) => void;
     undoLastMove: () => void;
+    renameCurrentCombination: (name: string) => void;
+    removeCurrentCombination: () => void;
     movesHistory: {
         moveId: MoveId;
         nextPositionId: PositionId;

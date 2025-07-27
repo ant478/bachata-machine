@@ -9,6 +9,8 @@ import { POSITION_TITLE_BY_ID, MOVE_TITLE_BY_ID } from 'src/strings';
 import { ControlButton } from 'src/components/control_button/control_button';
 import { ReactComponent as UndoIcon } from 'src/img/undo.svg';
 import { useCtrlZListener } from 'src/hooks/useCtrlZListener';
+import { useEvent } from 'react-use-event-hook';
+import { isElementEditable } from 'src/utils/dom';
 
 import styles from './combination_moves.module.scss';
 
@@ -20,7 +22,15 @@ const scrollbarClasses = { view: styles.scrollbarView };
 
 export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
     const { movesHistory, undoLastMove } = useBachataMachine();
-    useCtrlZListener(undoLastMove);
+    const handleCtrlZ = useEvent(() => {
+        if (!isElementEditable(document.activeElement)) {
+            undoLastMove();
+            return true;
+        }
+
+        return false;
+    });
+    useCtrlZListener(handleCtrlZ);
 
     return (
         <div className={cx(styles.base, className)}>

@@ -1,11 +1,17 @@
-import { PropsWithChildren, useState, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
+import { PropsWithChildren, useState, useMemo, useRef, useLayoutEffect } from 'react';
 import { createActor, Actor } from 'xstate';
 import { useEvent } from 'react-use-event-hook';
 import { LS_KEY_BASE } from 'src/constants/local_storage';
 import { Combination } from 'src/api/combinations';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { selectors, saveCombinations, addCombination, updateCombination } from 'src/store/slices/combination_slice';
+import {
+    selectors,
+    saveCombinations,
+    addCombination,
+    updateCombination,
+    removeCombination,
+} from 'src/store/slices/combination_slice';
 import { machine, COMMAND_ID, unpackState, TRANSITIONS_CONFIG, MoveId, INITIAL_STATE } from 'src/machine';
 import { bachataMachineContext, BachataMachineContextData } from './context';
 import { DEFAULT_NAME } from 'src/constants/combination';
@@ -17,7 +23,7 @@ export type BachataMachineContextProviderProps = PropsWithChildren;
 function getInitialCombinationId(combinations: Combination[]) {
     if (combinations.length === 0) return 0;
     const value = Number(localStorage.getItem(`${LS_KEY_BASE}:last_combination_id`));
-    if (!Number.isNaN(value)) return combinations[0].id;
+    if (Number.isNaN(value)) return combinations[0].id;
     if (combinations.every(({ id }) => id !== value)) return combinations[0].id;
     return value;
 }
@@ -61,6 +67,20 @@ export function BachataMachineContextProvider({ children }: BachataMachineContex
             dispatch(updateCombination({ id: currentCombinationId, changes: { snapshot } }));
         } else {
             dispatch(addCombination({ id: currentCombinationId, name: DEFAULT_NAME, snapshot }));
+            localStorage.setItem(`${LS_KEY_BASE}:last_combination_id`, String(currentCombinationId));
+        }
+
+        dispatch(saveCombinations());
+    });
+
+    const renameCurrentCombination = useEvent((name: string) => {
+        if (currentCombination) {
+            dispatch(updateCombination({ id: currentCombinationId, changes: { name } }));
+        } else {
+            dispatch(
+                addCombination({ id: currentCombinationId, name, snapshot: actorRef.current.getPersistedSnapshot() })
+            );
+            localStorage.setItem(`${LS_KEY_BASE}:last_combination_id`, String(currentCombinationId));
         }
 
         dispatch(saveCombinations());
@@ -90,14 +110,21 @@ export function BachataMachineContextProvider({ children }: BachataMachineContex
         };
     }, [currentCombinationId, updateProviderData, syncMachineDataWithStore, createActorFromData]);
 
-    useEffect(() => {
-        openCombination(currentCombinationId);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const openCombination = useEvent((combinationId: Combination['id']) => {
         setCurrentCombinationId(combinationId);
-        localStorage.setItem(`${LS_KEY_BASE}:last_combination_id`, String(combinationId)); // ?
+        if (combinations.some(({ id }) => id === combinationId)) {
+            localStorage.setItem(`${LS_KEY_BASE}:last_combination_id`, String(combinationId));
+        }
+    });
+
+    const removeCurrentCombination = useEvent(() => {
+        if (combinations.some(({ id }) => id === currentCombinationId)) {
+            dispatch(removeCombination(currentCombinationId));
+            dispatch(saveCombinations());
+        }
+        const otherCombinations = combinations.filter(({ id }) => id !== currentCombinationId);
+
+        openCombination(otherCombinations.length !== 0 ? otherCombinations[0].id : currentCombinationId !== 0 ? 0 : 1);
     });
 
     const makeMove = useEvent((moveId: MoveId) => {
@@ -115,6 +142,8 @@ export function BachataMachineContextProvider({ children }: BachataMachineContex
             currentPositionId,
             availableMoves,
             makeMove,
+            renameCurrentCombination,
+            removeCurrentCombination,
             undoLastMove,
             movesHistory,
             currentCount,
@@ -125,6 +154,8 @@ export function BachataMachineContextProvider({ children }: BachataMachineContex
             currentPositionId,
             availableMoves,
             makeMove,
+            renameCurrentCombination,
+            removeCurrentCombination,
             undoLastMove,
             movesHistory,
             currentCount,
