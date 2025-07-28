@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '..', 'dist');
 
-app.use(sslRedirect());
+app.use(sslRedirect.default());
 app.use(compression());
 
 app.use((req, res, next) => {
