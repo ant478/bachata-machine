@@ -1,12 +1,4 @@
-import {
-    useRef,
-    useCallback,
-    useEffect,
-    useLayoutEffect,
-    KeyboardEventHandler,
-    MouseEvent as ReactMouseEvent,
-    WheelEventHandler,
-} from 'react';
+import { useRef, useCallback, useEffect, useLayoutEffect, KeyboardEventHandler, WheelEventHandler } from 'react';
 import cx from 'classnames';
 import { HUE_RANGE } from 'src/constants/hue';
 import { useWindowEventListener } from 'src/hooks/useEventListener';
@@ -78,10 +70,10 @@ export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKe
     useAnimationCycle(animateSliderPosition, true);
 
     const handleControlMouseDown = useCallback(
-        (event: ReactMouseEvent) => {
+        event => {
             clickOffsetRef.current =
                 event.target === sliderRef.current
-                    ? event.clientY - sliderPositionRef.current
+                    ? (event.touches?.[0]?.clientY ?? event.clientY) - sliderPositionRef.current
                     : controlRef.current.getBoundingClientRect().top;
 
             startDraggingAnimation();
@@ -91,8 +83,9 @@ export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKe
         [startDraggingAnimation]
     );
 
-    const handleWindowMouseMove = useCallback(({ clientY }: MouseEvent) => {
-        mousePositionRef.current = clientY;
+    const handleWindowMouseMove = useCallback(event => {
+        event.preventDefault();
+        mousePositionRef.current = event.touches?.[0]?.clientY ?? event.clientY;
     }, []);
 
     const handleWindowMouseUp = useCallback(() => {
@@ -119,11 +112,19 @@ export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKe
     );
 
     useWindowEventListener('mousemove', handleWindowMouseMove);
+    useWindowEventListener('touchmove', handleWindowMouseMove, { passive: false });
     useWindowEventListener('mouseup', handleWindowMouseUp);
+    useWindowEventListener('touchend', handleWindowMouseUp);
+    useWindowEventListener('touchcancel', handleWindowMouseUp);
 
     return (
         <div className={cx(styles.base, className)} onWheel={handleWheel}>
-            <div className={styles.control} ref={controlRef} onMouseDown={handleControlMouseDown}>
+            <div
+                className={styles.control}
+                ref={controlRef}
+                onMouseDown={handleControlMouseDown}
+                onTouchStart={handleControlMouseDown}
+            >
                 <button onKeyDown={handleKeyDown} type="button" className={styles.slider} ref={sliderRef} />
             </div>
         </div>

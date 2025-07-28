@@ -88,6 +88,7 @@ export const HueControl = memo(({ className }: HueControlProps) => {
     }, []);
 
     useWindowEventListener('click', handleWindowClick);
+    useWindowEventListener('touchstart', handleWindowClick);
 
     const classes = cx(styles.base, className, {
         [styles.base__controlVisible]: isControlVisible,

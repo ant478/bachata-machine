@@ -22,6 +22,7 @@ body,
 }
 
 body {
+    overscroll-behavior: none;
     @include mobile {
         overflow-y: auto;
     }
@@ -49,10 +50,6 @@ html {
     }
 }
 
-body {
-    overscroll-behavior: none;
-}
-
 a {
     color: inherit;
     outline: none;
@@ -69,4 +66,5 @@ button {
     outline: none;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
