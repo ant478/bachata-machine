@@ -18,4 +18,12 @@ export default defineConfig({
             },
         },
     },
+    optimizeDeps: {
+        include: ['@ant478/web-components'],
+    },
+    build: {
+        commonjsOptions: {
+            transformMixedEsModules: true,
+        },
+    },
 });

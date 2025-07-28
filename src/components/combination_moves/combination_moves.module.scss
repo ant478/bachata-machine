@@ -42,13 +42,7 @@
     min-height: 2.375em;
     padding: 0.5em 3.1em 0.125em 1.25em;
     flex-shrink: 0;
-
-    &__count1 {
-        background-color: var(--moves-chart-color-1);
-    }
-    &__count5 {
-        background-color: var(--moves-chart-color-2);
-    }
+    z-index: 0;
 
     &::before,
     &::after {
@@ -72,8 +66,21 @@
     &__positionEnd::after {
         content: '';
         top: 0;
-        bottom: 0.5em;
+        bottom: 0.75em;
         width: 0.125em;
+    }
+}
+
+.moveBackground {
+    @include full-size;
+    opacity: 0.6;
+    z-index: -1;
+
+    .move__count1 & {
+        background-color: var(--moves-chart-color-1);
+    }
+    .move__count5 & {
+        background-color: var(--moves-chart-color-2);
     }
 }
 
@@ -85,8 +92,8 @@
 
 .moveNewPosition {
     margin-top: auto;
-    font-size: 0.75rem;
-    line-height: 1.25;
+    font-size: 0.875rem;
+    line-height: 1.5;
     opacity: 0.75;
 }
 

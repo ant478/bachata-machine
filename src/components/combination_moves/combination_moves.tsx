@@ -51,6 +51,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                                 key={index}
                                 className={cx(styles.move, styles[`move__count${count}`], styles.move__positionStart)}
                             >
+                                <div className={styles.moveBackground} />
                                 <div className={styles.moveNewPosition}>
                                     Start:{' '}
                                     <span className={styles.moveNewPositionHighlight}>
@@ -77,6 +78,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                                     styles.move__positionContinue
                                 )}
                             >
+                                <div className={styles.moveBackground} />
                                 {MOVE_TITLE_BY_ID[moveId]}
                                 <MoveGlyph
                                     className={styles.moveGlyph}
@@ -92,6 +94,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                                     isPositionChanged ? styles.move__positionEnd : styles.move__positionContinue
                                 )}
                             >
+                                <div className={styles.moveBackground} />
                                 ...
                                 <MoveGlyph
                                     className={styles.moveGlyph}
@@ -119,6 +122,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                                 isPositionChanged ? styles.move__positionEnd : styles.move__positionContinue
                             )}
                         >
+                            <div className={styles.moveBackground} />
                             {MOVE_TITLE_BY_ID[moveId]}
                             <MoveGlyph className={styles.moveGlyph} symbols={getMoveGlyphSymbols(prevCount, count)} />
                             {isPositionChanged && (
