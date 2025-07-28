@@ -116,7 +116,7 @@ const Menu = memo(({ onClose }: MenuProps) => {
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'bachata-machine-combinations.json';
+        a.download = 'ant478-bachata-machine-combinations.json';
         a.click();
 
         URL.revokeObjectURL(url);
@@ -126,7 +126,7 @@ const Menu = memo(({ onClose }: MenuProps) => {
 
     return (
         <div ref={ref} className={styles.menu}>
-            <CustomScrollbar className={styles.openListScrollbar} classNames={openListScrollbarClasses}>
+            <CustomScrollbar classNames={openListScrollbarClasses}>
                 {(() => {
                     if (isOpeListVisible) {
                         return combinations.map(({ id, name }) => (

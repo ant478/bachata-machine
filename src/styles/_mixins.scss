@@ -1,4 +1,5 @@
 @use './variables' as *;
+@use './media' as *;
 
 @mixin highlighted-block($maskImageUrl: none, $maskPosition: center) {
     background-color: var(--highlighted-block-background-color);
@@ -49,29 +50,31 @@
             box-shadow $transition;
     }
 
-    &:focus#{$selector} {
-        @include control-block-styles('-hover');
-
-        transition-duration: 0s;
-    }
-
-    @supports #{'\selector(*:focus-visible)'} {
+    @media (hover: hover) and (pointer: fine) {
         &:focus#{$selector} {
-            @include control-block-styles;
-        }
-        &:focus-visible#{$selector} {
             @include control-block-styles('-hover');
 
             transition-duration: 0s;
         }
-    }
-    &:hover#{$selector} {
-        @include control-block-styles('-hover');
 
-        transition-duration: 0s;
-    }
-    &:active#{$selector} {
-        @include control-block-styles('-active');
+        @supports #{'\selector(*:focus-visible)'} {
+            &:focus#{$selector} {
+                @include control-block-styles;
+            }
+            &:focus-visible#{$selector} {
+                @include control-block-styles('-hover');
+
+                transition-duration: 0s;
+            }
+        }
+        &:hover#{$selector} {
+            @include control-block-styles('-hover');
+
+            transition-duration: 0s;
+        }
+        &:active#{$selector} {
+            @include control-block-styles('-active');
+        }
     }
 }
 

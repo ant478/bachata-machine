@@ -29,20 +29,10 @@
     height: 19.375em;
 }
 
-.openListScrollbar {
-    @include mobile {
-        overflow-y: auto !important;
-    }
-}
-
 .openListScrollbarView {
     padding: 1em;
     display: flex;
     flex-direction: column;
-    @include mobile {
-        overflow: hidden !important;
-        position: relative !important;
-    }
 }
 
 .menuButton {

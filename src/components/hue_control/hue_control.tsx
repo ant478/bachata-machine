@@ -3,9 +3,10 @@ import { memo, useRef, useCallback, useState, useReducer } from 'react';
 import { useWindowEventListener } from 'src/hooks/useEventListener';
 import { getHueValueFromLocalStorage, saveHueValueToLocalStorage, validateHueValue } from 'src/utils/hue';
 import { HueControlSlider } from 'src/components/hue_control_slider/hue_control_slider';
-import { ARROW_DOWN_KEY_CODE, ARROW_UP_KEY_CODE, ESC_KEY_CODE } from 'src/constants/key-codes';
 import { HUE_DELTA } from 'src/constants/hue';
 import { ReactComponent as BrushIcon } from 'src/img/brush.svg';
+import { useEscKeydownListener } from 'src/hooks/useKeydownListener';
+import { useEvent } from 'react-use-event-hook';
 
 import styles from './hue_control.module.scss';
 
@@ -39,30 +40,6 @@ export const HueControl = memo(({ className }: HueControlProps) => {
         [changeValue]
     );
 
-    const handleKeyDown = useCallback(
-        ({ keyCode, ctrlKey }) => {
-            if (!isControlVisibleRef.current) return;
-
-            if (keyCode === ESC_KEY_CODE) {
-                toggleIsControlVisible(false);
-                return;
-            }
-
-            if (![ARROW_UP_KEY_CODE, ARROW_DOWN_KEY_CODE].includes(keyCode)) return;
-
-            let delta = keyCode === ARROW_DOWN_KEY_CODE ? HUE_DELTA : -HUE_DELTA;
-
-            if (ctrlKey) {
-                delta *= 5;
-            }
-
-            const newValue = validateHueValue(valueRef.current + delta);
-
-            changeValue(newValue);
-        },
-        [changeValue]
-    );
-
     const handleWheel = useCallback(
         ({ deltaY }) => {
             if (!isControlVisibleRef.current) return;
@@ -87,6 +64,8 @@ export const HueControl = memo(({ className }: HueControlProps) => {
         if (!isInside) toggleIsControlVisible(false);
     }, []);
 
+    const handleEsc = useEvent(() => toggleIsControlVisible(false));
+    useEscKeydownListener(handleEsc);
     useWindowEventListener('click', handleWindowClick);
     useWindowEventListener('touchstart', handleWindowClick);
 
@@ -101,7 +80,6 @@ export const HueControl = memo(({ className }: HueControlProps) => {
                 onClick={handleControlClick}
                 type="button"
                 className={styles.sample}
-                onKeyDown={handleKeyDown}
                 onWheel={handleWheel}
             >
                 <BrushIcon className={styles.sampleIcon} />
@@ -111,7 +89,6 @@ export const HueControl = memo(({ className }: HueControlProps) => {
                     className={styles.sliderMix}
                     value={value}
                     onChange={handleControlChange}
-                    onKeyDown={handleKeyDown}
                     onWheel={handleWheel}
                 />
             )}

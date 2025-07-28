@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, useLayoutEffect, KeyboardEventHandler, WheelEventHandler } from 'react';
+import { useRef, useCallback, useEffect, useLayoutEffect, WheelEventHandler } from 'react';
 import cx from 'classnames';
 import { HUE_RANGE } from 'src/constants/hue';
 import { useWindowEventListener } from 'src/hooks/useEventListener';
@@ -15,10 +15,9 @@ export type HueControlSliderProps = {
     value: number;
     onChange: (value: number) => void;
     onWheel: WheelEventHandler<HTMLDivElement>;
-    onKeyDown: KeyboardEventHandler<HTMLButtonElement>;
 };
 
-export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKeyDown }: HueControlSliderProps) => {
+export const HueControlSlider = ({ className, value = 0, onChange, onWheel }: HueControlSliderProps) => {
     const controlRef = useRef(null);
     const sliderRef = useRef(null);
     const valueRef = useRef(value);
@@ -71,6 +70,7 @@ export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKe
 
     const handleControlMouseDown = useCallback(
         event => {
+            mousePositionRef.current = event.touches?.[0]?.clientY ?? event.clientY;
             clickOffsetRef.current =
                 event.target === sliderRef.current
                     ? (event.touches?.[0]?.clientY ?? event.clientY) - sliderPositionRef.current
@@ -102,15 +102,6 @@ export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKe
         [onWheel]
     );
 
-    const handleKeyDown = useCallback(
-        event => {
-            if (isMouseDownRef.current) return;
-
-            onKeyDown(event);
-        },
-        [onKeyDown]
-    );
-
     useWindowEventListener('mousemove', handleWindowMouseMove);
     useWindowEventListener('touchmove', handleWindowMouseMove, { passive: false });
     useWindowEventListener('mouseup', handleWindowMouseUp);
@@ -125,7 +116,7 @@ export const HueControlSlider = ({ className, value = 0, onChange, onWheel, onKe
                 onMouseDown={handleControlMouseDown}
                 onTouchStart={handleControlMouseDown}
             >
-                <button onKeyDown={handleKeyDown} type="button" className={styles.slider} ref={sliderRef} />
+                <button type="button" className={styles.slider} ref={sliderRef} />
             </div>
         </div>
     );
