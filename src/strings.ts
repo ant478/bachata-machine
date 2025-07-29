@@ -3,7 +3,9 @@ import { MoveId, MOVE_ID, PositionId, POSITION_ID } from 'src/machine';
 export const MOVE_TITLE_BY_ID: Record<MoveId, string> = {
     [MOVE_ID.BASIC]: 'Basic step',
     [MOVE_ID.STRAIGHT_TURN]: 'Straight turn',
+    [MOVE_ID.STRAIGHT_TURN_WITH_HAND_CHANGE]: 'Straight turn with hand change',
     [MOVE_ID.STRAIGHT_TURN_SELF]: 'Straight turn (self)',
+    [MOVE_ID.STRAIGHT_TURN_WITH_HAND_CHANGE_SELF]: 'Straight turn with hand change (self)',
     [MOVE_ID.TWO_HAND_TURN]: 'Two hand turn',
     [MOVE_ID.HAMMERLOCK_TURN]: 'Hammerlock turn',
     [MOVE_ID.HAMMERLOCK_TURN_SELF]: 'Hammerlock turn (self)',

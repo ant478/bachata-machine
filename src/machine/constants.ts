@@ -29,7 +29,9 @@ export const COMMAND_ID = {
 export const MOVE_ID = {
     BASIC: 'basic',
     STRAIGHT_TURN: 'straight_turn',
+    STRAIGHT_TURN_WITH_HAND_CHANGE: 'straight_turn_with_hand_change',
     STRAIGHT_TURN_SELF: 'straight_turn_self',
+    STRAIGHT_TURN_WITH_HAND_CHANGE_SELF: 'straight_turn_with_hand_change_self',
     TWO_HAND_TURN: 'two_hand_turn',
     HAMMERLOCK_TURN: 'hammerlock_turn',
     HAMMERLOCK_TURN_SELF: 'hammerlock_turn_self',
