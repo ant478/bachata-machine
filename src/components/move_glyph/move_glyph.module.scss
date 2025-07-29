@@ -1,8 +1,22 @@
 .base {
+    display: flex;
     font-weight: 700;
     font-size: 1.25rem;
     text-align: center;
     line-height: 1;
     user-select: none;
-    font-family: $font-family-glyphs;
+}
+
+.symbol {
+    position: relative;
+    width: 1em;
+    height: 1em;
+
+    & > svg {
+        @include full-size;
+    }
+
+    &:not(:last-child) {
+        margin-right: -0.125em;
+    }
 }

@@ -8,7 +8,13 @@ import { selectors } from 'src/store/slices/combination_slice';
 import { addCombinations, saveCombinations } from 'src/store/slices/combination_slice';
 import { DEFAULT_NAME } from 'src/constants/combination';
 import { ControlButton } from 'src/components/control_button/control_button';
-import { ReactComponent as MenuIcon } from 'src/img/menu.svg';
+import { ReactComponent as MenuIcon } from 'src/img/icons/menu.svg';
+import { ReactComponent as OpenIcon } from 'src/img/icons/open.svg';
+import { ReactComponent as NewIcon } from 'src/img/icons/new.svg';
+import { ReactComponent as DownloadIcon } from 'src/img/icons/download.svg';
+import { ReactComponent as UploadIcon } from 'src/img/icons/upload.svg';
+import { ReactComponent as DeleteIcon } from 'src/img/icons/delete.svg';
+import { ReactComponent as EditIcon } from 'src/img/icons/edit.svg';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { useEscKeydownListener } from 'src/hooks/useKeydownListener';
 import { CustomScrollbar } from 'src/components/custom_scrollbar/custom_scrollbar';
@@ -145,22 +151,22 @@ const Menu = memo(({ onClose }: MenuProps) => {
                     return (
                         <>
                             <ControlButton title="New" className={styles.menuButton} onClick={handleNewClick}>
-                                ✚ New
+                                <NewIcon className={styles.menuButtonIcon} /> New
                             </ControlButton>
                             <ControlButton title="Open" className={styles.menuButton} onClick={handleOpenClick}>
-                                ▣ Open
+                                <OpenIcon className={styles.menuButtonIcon} /> Open
                             </ControlButton>
                             <ControlButton title="Rename" className={styles.menuButton} onClick={handleRenameClick}>
-                                🖉 Rename
+                                <EditIcon className={styles.menuButtonIcon} /> Rename
                             </ControlButton>
                             <ControlButton title="Delete" className={styles.menuButton} onClick={handleRemoveClick}>
-                                🗙 Delete
+                                <DeleteIcon className={styles.menuButtonIcon} /> Delete
                             </ControlButton>
                             <ControlButton title="Import" className={styles.menuButton} onClick={handleImportClick}>
-                                🡇 Import
+                                <UploadIcon className={styles.menuButtonIcon} /> Import
                             </ControlButton>
                             <ControlButton title="Export" className={styles.menuButton} onClick={handleExportClick}>
-                                🡅 Export
+                                <DownloadIcon className={styles.menuButtonIcon} /> Export
                             </ControlButton>
                         </>
                     );

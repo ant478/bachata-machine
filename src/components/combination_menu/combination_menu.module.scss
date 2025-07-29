@@ -21,12 +21,12 @@
 .menu {
     @include highlighted-block(var(--code-paterrn-url), center top);
     position: absolute;
-    right: 0.5em;
-    bottom: 0.125em;
+    right: 0;
+    bottom: 0;
     transform: translateY(100%);
     width: 12em;
     z-index: 1;
-    height: 19.375em;
+    height: 19.6875em;
 }
 
 .openListScrollbarView {
@@ -42,6 +42,14 @@
     &:not(:last-child) {
         margin-bottom: 0.625em;
     }
+}
+
+.menuButtonIcon {
+    height: 1.25em;
+    width: 1.25em;
+    vertical-align: middle;
+    margin-bottom: 0.125em;
+    margin-right: 0.125em;
 }
 
 .base .openMenuButton {

@@ -1,10 +1,11 @@
 .base {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 2em 0.5em;
     gap: 1em;
-    @include desktop {
-        flex-direction: row;
+    @include mobile {
+        flex-direction: column;
+        padding-bottom: 0.5em;
     }
 }
 

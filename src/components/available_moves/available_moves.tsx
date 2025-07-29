@@ -6,7 +6,6 @@ import { CustomScrollbar } from 'src/components/custom_scrollbar/custom_scrollba
 import { ControlButton } from 'src/components/control_button/control_button';
 import { MoveGlyph } from 'src/components/move_glyph/move_glyph';
 import { MoveId } from 'src/machine';
-import { getMoveGlyphSymbols } from 'src/utils/strings';
 import { MOVE_TITLE_BY_ID, POSITION_TITLE_BY_ID } from 'src/strings';
 
 import styles from './available_moves.module.scss';
@@ -44,10 +43,7 @@ export const AvailableMoves = memo(({ className }: AvailableMovesProps) => {
                                 </span>
                             </div>
                         )}
-                        <MoveGlyph
-                            className={styles.moveGlyphMix}
-                            symbols={getMoveGlyphSymbols(currentCount, nextCount)}
-                        />
+                        <MoveGlyph className={styles.moveGlyphMix} currentCount={currentCount} nextCount={nextCount} />
                     </ControlButton>
                 ))}
             </CustomScrollbar>

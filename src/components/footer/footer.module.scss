@@ -3,7 +3,6 @@
 
     &::part(root) {
         font-family: $font-family-primary;
-        font-size: 0.75rem;
         --wc-background-color: transparent;
         --wc-text-color: var(--primary-text-color);
         --wc-nickname-text-color: var(--page-title-color);
@@ -12,6 +11,7 @@
         @include mobile {
             flex-direction: column;
             padding: 0.5em;
+            font-size: 0.75rem;
         }
     }
 

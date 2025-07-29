@@ -3,11 +3,10 @@ import cx from 'classnames';
 import { useBachataMachine } from 'src/components/bachata_machine/context';
 import { CustomScrollbar } from 'src/components/custom_scrollbar/custom_scrollbar';
 import { MoveGlyph } from 'src/components/move_glyph/move_glyph';
-import { getMoveGlyphSymbols } from 'src/utils/strings';
 import { COUNT } from 'src/machine';
 import { POSITION_TITLE_BY_ID, MOVE_TITLE_BY_ID } from 'src/strings';
 import { ControlButton } from 'src/components/control_button/control_button';
-import { ReactComponent as UndoIcon } from 'src/img/undo.svg';
+import { ReactComponent as UndoIcon } from 'src/img/icons/undo.svg';
 import { useCtrlZListener } from 'src/hooks/useCtrlZListener';
 import { useEvent } from 'react-use-event-hook';
 import { isElementEditable } from 'src/utils/dom';
@@ -80,10 +79,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                             >
                                 <div className={styles.moveBackground} />
                                 {MOVE_TITLE_BY_ID[moveId]}
-                                <MoveGlyph
-                                    className={styles.moveGlyph}
-                                    symbols={getMoveGlyphSymbols(count, middleCount)}
-                                />
+                                <MoveGlyph className={styles.moveGlyph} currentCount={count} nextCount={middleCount} />
                             </div>,
                             <div
                                 key={`${index}:1`}
@@ -96,10 +92,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                             >
                                 <div className={styles.moveBackground} />
                                 ...
-                                <MoveGlyph
-                                    className={styles.moveGlyph}
-                                    symbols={getMoveGlyphSymbols(middleCount, count)}
-                                />
+                                <MoveGlyph className={styles.moveGlyph} currentCount={middleCount} nextCount={count} />
                                 {isPositionChanged && (
                                     <div className={styles.moveNewPosition}>
                                         To:{' '}
@@ -124,7 +117,7 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
                         >
                             <div className={styles.moveBackground} />
                             {MOVE_TITLE_BY_ID[moveId]}
-                            <MoveGlyph className={styles.moveGlyph} symbols={getMoveGlyphSymbols(prevCount, count)} />
+                            <MoveGlyph className={styles.moveGlyph} currentCount={prevCount} nextCount={count} />
                             {isPositionChanged && (
                                 <div className={styles.moveNewPosition}>
                                     To:{' '}

@@ -4,7 +4,7 @@ import { useWindowEventListener } from 'src/hooks/useEventListener';
 import { getHueValueFromLocalStorage, saveHueValueToLocalStorage, validateHueValue } from 'src/utils/hue';
 import { HueControlSlider } from 'src/components/hue_control_slider/hue_control_slider';
 import { HUE_DELTA } from 'src/constants/hue';
-import { ReactComponent as BrushIcon } from 'src/img/brush.svg';
+import { ReactComponent as BrushIcon } from 'src/img/icons/brush.svg';
 import { useEscKeydownListener } from 'src/hooks/useKeydownListener';
 import { useEvent } from 'react-use-event-hook';
 
