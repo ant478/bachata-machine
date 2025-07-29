@@ -17,7 +17,7 @@
 .title {
     @include title;
     padding: 0.75em 1em 0.5em;
-    padding-right: 3.25em;
+    padding-right: 7.5em;
 }
 
 .base .undoButton {
@@ -33,6 +33,16 @@
 .undoIcon {
     height: 1em;
     width: 1em;
+}
+
+.totalCount {
+    position: absolute;
+    right: 3.5em;
+    top: 0.625em;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.25;
 }
 
 .move {

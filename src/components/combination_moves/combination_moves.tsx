@@ -31,9 +31,17 @@ export const CombinationMoves = memo(({ className }: CombinationMovesProps) => {
     });
     useCtrlZListener(handleCtrlZ);
 
+    const totalCount = movesHistory.reduce((acc, { nextCount }, index) => {
+        if (index === 0) return acc;
+
+        const duration = movesHistory[index - 1].nextCount === nextCount ? 8 : 4;
+        return acc + duration;
+    }, 0);
+
     return (
         <div className={cx(styles.base, className)}>
             <h2 className={styles.title}>Moves:</h2>
+            <div className={styles.totalCount}>{totalCount / 8} x 8</div>
             <ControlButton
                 title="Undo"
                 className={styles.undoButton}
